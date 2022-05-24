@@ -7,7 +7,6 @@ const Checkout = (props) => {
 		let s = 0
 		props.cart.forEach(item => {
 			s += item.price * item.qty
-			console.log(s)
 		})
 		setTotal(s)
 	}, [JSON.stringify(props.cart)])
@@ -17,9 +16,9 @@ const Checkout = (props) => {
 			<Head>
 				<title>eCommerce - Checkout</title>
 			</Head>
-			<div className='container md:mx-auto mx-4 mb-4 overflow-auto' style={{ color: "green", fontSize: "20px", fontWeight: "bold" }}>
+			{/* <div className='container md:mx-auto mx-4 mb-4 overflow-auto' style={{ color: "green", fontSize: "20px", fontWeight: "bold" }}>
 				<pre><code>{JSON.stringify(props.cart, null, 4)}</code></pre>
-			</div>
+			</div> */}
 			<div className="container md:mx-auto mx-4 mb-4">
 				{(props.cart.length===0)?(
 					<div className='text-xl'><span>Cart Empty, </span><a className='text-blue-900 font-bold' href="/products">Add</a> a product now</div>
@@ -30,7 +29,7 @@ const Checkout = (props) => {
 					return(
 						<div className="py-8 md:flex flex-wrap md:flex-nowrap" key={item.item}>
 							<div className="md:flex-grow">
-								<h2 className="text-2xl font-medium text-gray-900 title-font mb-2">{item.item}</h2>
+								<h2 className="text-2xl font-medium text-gray-900 title-font mb-2">{item.name}</h2>
 								<p className="leading-relaxed">Price: &#8377; {item.price}</p>
 								<p className="leading-relaxed">Quantity: {item.qty}</p>
 							</div>
@@ -38,7 +37,7 @@ const Checkout = (props) => {
 							<div className="w-100 flex items-center">
 								<button onClick={()=>{props.removeFromCart(item.item, 1)}} className="flex ml-auto text-white bg-indigo-600 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-700 rounded">-</button>
 								<span className="flex ml-5">{item.qty}</span>
-								<button onClick={()=>{props.addToCart(item.item, 1, item.price)}} className="flex ml-5 text-white bg-indigo-600 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-700 rounded">+</button>
+								<button onClick={()=>{props.addToCart(item.item, 1, item.price, item.name)}} className="flex ml-5 text-white bg-indigo-600 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-700 rounded">+</button>
 							</div>
 							</div>
 						</div>

@@ -2,68 +2,124 @@ import Navbar from '../components/Navbar'
 import '../styles/globals.css'
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
+import jwtDecode from 'jwt-decode'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function MyApp({ Component, pageProps }) {
 	const [cart, setCart] = useState([])
 	const [reloadKey, setReloadKey] = useState(1)
-	const addToCart = (item, qty, price)=>{
-		for (let i = 0; i < qty; i++) {
-			let newCart = cart
-			let res = newCart.filter(o=>o.item===item)
-			if(res.length!=0){
-				res.map(o=>o.qty=o.qty+1)
-			}
-			else{
-				newCart.push({item, price, qty: 1})
-			}
-			setCart(newCart)
-			localStorage.setItem('cart', JSON.stringify(newCart)) 
-			console.table(newCart)
+	const uploadCart = (newCart) => {
+		let jwt = getCookie('jwt')
+		if(!jwt){ return }
+		fetch('http://localhost:1337/api/users/me', {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': 'Bearer ' + jwt
+			},
+		}).then(data => data.json()).then((user) => {
+			fetch('http://localhost:1337/api/carts/?filters[username]=' + user.username, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					'Authorization': 'Bearer ' + jwt
+				},
+			}).then(() => {
+				fetch('http://localhost:1337/api/carts/' + user.id, {
+					method: 'PUT',
+					body: JSON.stringify({
+						"data": { "products": newCart }
+					}),
+					headers: {
+						'Content-Type': 'application/json',
+						'Authorization': 'Bearer ' + jwt
+					},
+				})
+			})
+	})
+}
+const addToCart = (item, qty, price, name) => {
+	let newCart = cart
+	for (let i = 0; i < qty; i++) {
+		let res = newCart.filter(o => o.item === item)
+		if (res.length != 0) {
+			res.map(o => o.qty = o.qty + 1)
 		}
-		setReloadKey(Math.random())
+		else {
+			newCart.push({ item, price, name, qty: 1 })
+		}
 	}
-	const removeFromCart = (item, qty)=>{
-		let newCart = cart
-		let res = newCart.filter(o=>o.item===item)
-		console.log("res = ",res, qty)
-		if(res.length!=0){
-			if(res[0].qty>qty){
-				res.map(o=>o.qty=o.qty-qty)
-			}
-			else if(res[0].qty===qty){
-				newCart.splice(newCart.map(o=>o.item).indexOf(item), 1)
-			}
+	setCart(newCart)
+	localStorage.setItem('cart', JSON.stringify(newCart))
+	uploadCart(newCart)
+	setReloadKey(Math.random())
+}
+const removeFromCart = (item, qty) => {
+	let newCart = cart
+	let res = newCart.filter(o => o.item === item)
+	if (res.length != 0) {
+		if (res[0].qty > qty) {
+			res.map(o => o.qty = o.qty - qty)
 		}
-		setCart(newCart)
-		localStorage.setItem('cart', JSON.stringify(newCart)) 
-		console.table(newCart)
-		setReloadKey(Math.random())
+		else if (res[0].qty === qty) {
+			newCart.splice(newCart.map(o => o.item).indexOf(item), 1)
+		}
 	}
-	const clearCart = ()=>{
-		setCart([])
-		localStorage.setItem('cart', '') 
-		setReloadKey(Math.random())
+	setCart(newCart)
+	localStorage.setItem('cart', JSON.stringify(newCart))
+	uploadCart(newCart)
+	setReloadKey(Math.random())
+}
+const clearCart = () => {
+	setCart([])
+	localStorage.setItem('cart', '')
+	uploadCart([])
+	setReloadKey(Math.random())
+}
+const setCookie = (cname, cvalue, exdays) => {
+	const d = new Date();
+	d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+	let expires = "expires=" + d.toUTCString();
+	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+	setReloadKey(Math.random())
+}
+const getCookie = (cname) => {
+	let name = cname + "=";
+	let decodedCookie = decodeURIComponent(document.cookie);
+	let ca = decodedCookie.split(';');
+	for (let i = 0; i < ca.length; i++) {
+		let c = ca[i];
+		while (c.charAt(0) == ' ') {
+			c = c.substring(1);
+		}
+		if (c.indexOf(name) == 0) {
+			return c.substring(name.length, c.length);
+		}
 	}
-	useEffect(() => {
-		let myCart = localStorage.getItem('cart')
-		if (myCart) {
-			myCart = JSON.parse(myCart)
-		}
-		else{
-			myCart = []
-		}
-		if(myCart){
-			setCart(myCart)
-		}
-	}, [])
-	
-	return <>
-		<Navbar key={reloadKey} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} />
-		<Head>
-			<meta name="description" content="Website made by Sai Krishna Karnati using Next.js, React.js and Strapi" />
-		</Head>
-		<Component {...pageProps} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} />
-	</>
+	return "";
+}
+useEffect(() => {
+	let myCart = localStorage.getItem('cart')
+	if (myCart) {
+		myCart = JSON.parse(myCart)
+	}
+	else {
+		myCart = []
+	}
+	if (myCart) {
+		setCart(myCart)
+	}
+}, [])
+
+return <>
+	<Head>
+		<meta name="description" content="Website made by Sai Krishna Karnati using Next.js, React.js and Strapi" />
+	</Head>
+	<Navbar key={reloadKey} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} setCookie={setCookie} getCookie={getCookie} />
+	<Component {...pageProps} cart={cart} setCart={setCart} setReloadKey={setReloadKey} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} setCookie={setCookie} getCookie={getCookie} />
+	<ToastContainer />
+</>
 }
 
 export default MyApp

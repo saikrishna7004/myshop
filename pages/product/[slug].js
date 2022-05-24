@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router'
 import Head from 'next/head'
+import Link from 'next/link'
 import React, { useEffect } from 'react'
+import { toast } from 'react-toastify'
 
 const Post = (props) => {
 	const router = useRouter()
@@ -87,23 +89,25 @@ const Post = (props) => {
 					<span className="title-font font-medium text-2xl text-gray-900">&#8377; {data.price}</span>
 					{
 						props.cart.filter(o=>o.item===data.slug).length==0?(
-							<button onClick={()=>{props.addToCart(data.slug, 1, data.price)}} className="flex ml-auto text-white bg-indigo-600 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-700 rounded">Add To Cart</button>
-						):(
-							<div className="flex items-center ml-auto">
+							<button onClick={()=>{props.addToCart(data.slug, 1, data.price, data.title)}} className="flex ml-auto text-white bg-indigo-600 border-0 py-2 px-3 focus:outline-none hover:bg-indigo-700 rounded">Add To Cart</button>
+							):(
+								<div className="flex items-center ml-auto">
 								<button onClick={()=>{props.removeFromCart(data.slug, 1)}} className="flex ml-auto text-white bg-indigo-600 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-700 rounded">-</button>
-								<span className="flex ml-5">{props.cart.filter(o=>o.item===data.slug)[0].qty}</span>
-								<button onClick={()=>{props.addToCart(data.slug, 1, data.price)}} className="flex ml-5 text-white bg-indigo-600 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-700 rounded">+</button>
+								<span className="flex ml-3">{props.cart.filter(o=>o.item===data.slug)[0].qty}</span>
+								<button onClick={()=>{props.addToCart(data.slug, 1, data.price, data.title)}} className="flex ml-3 text-white bg-indigo-600 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-700 rounded">+</button>
 							</div>
 						)
 						
 					}
-
-					<button	className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4" aria-label='Add to liked items' type='button'>
+					<button	className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-3" aria-label='Add to liked items' type='button'>
 						<svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5" viewBox="0 0 24 24">
 						<path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
 						</svg>
 					</button>
 					</div>
+
+					<Link href="/checkout"><a className="flex mt-4 ml-auto w-fit text-white bg-indigo-600 border-0 py-2 px-3 focus:outline-none hover:bg-indigo-700 rounded">Ckeckout</a></Link>
+
 				</div>
 				</div>
 			</div>
@@ -119,7 +123,7 @@ export async function getServerSideProps(context) {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization': 'Bearer 8aeb07d8b2b0fad0e5a88bce627ccf5248e36f708b75cf2b6feb454596f3eb8ab3da2d23718e10ab0ae42ff8e34205afc7bb63a4bfcf9feb8f40a83a59e277762f2f3382555b2e9c81456c56c1975ad29815d0d6cd9310355b763bde040e5fe56848f962dc9cc25df0f1ba322c69a69af96a00b9e68b9aeef6c6f1dacfaa481f'
+			'Authorization': 'Bearer '+ context.req.cookies.jwt
 		},
 	})
 	let products = await a.json()

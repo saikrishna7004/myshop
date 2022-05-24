@@ -44,11 +44,12 @@ const Products = (props) => {
 }
 
 export async function getServerSideProps(context) {
+	let jwt = context.req.cookies.jwt
 	let a = await fetch("http://localhost:1337/api/products?populate=*", {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization': 'Bearer 8aeb07d8b2b0fad0e5a88bce627ccf5248e36f708b75cf2b6feb454596f3eb8ab3da2d23718e10ab0ae42ff8e34205afc7bb63a4bfcf9feb8f40a83a59e277762f2f3382555b2e9c81456c56c1975ad29815d0d6cd9310355b763bde040e5fe56848f962dc9cc25df0f1ba322c69a69af96a00b9e68b9aeef6c6f1dacfaa481f'
+			'Authorization': 'Bearer '+ (jwt?jwt:'da23661141c0185346e5ee32518cb259ea8ee2e14b778a04bb2b54d2ff15cf5fd3c6d45d478c44679ca17cae6f7d6383cddfe0dcbf6f5f415102ff85d856c5d254ec13cab261ead6f08aed0b8e31faa2f5dd09493b42fccf08808a149dab2d22a72df6d86d2d45035257c93478cac19354cae25278d36c95c92f331ff97065fc')
 		},
 	})
 	let products = await a.json()

@@ -1,1 +1,0 @@
- onClick={()=>{progress(100)}
