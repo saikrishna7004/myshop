@@ -11,25 +11,27 @@ function MyApp({ Component, pageProps }) {
 	const [reloadKey, setReloadKey] = useState(1)
 	useEffect(() => {
 		let jwt = getCookie('jwt')
-		fetch(process.env.URL + '/api/users/me', {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-				'Authorization': 'Bearer ' + jwt
-			},
-		}).then(data => data.json()).then((user) => {
-			fetch(process.env.URL + '/api/carts/?filters[username]=' + user.username, {
+		if (jwt) {
+			fetch(process.env.URL + '/api/users/me', {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
 					'Authorization': 'Bearer ' + jwt
 				},
-			}).then(data=>data.json()).then((data)=>{
-				setCart(data.data.attributes.products)
+			}).then(data => data.json()).then((user) => {
+				fetch(process.env.URL + '/api/carts/?filters[username]=' + user.username, {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+						'Authorization': 'Bearer ' + jwt
+					},
+				}).then(data => data.json()).then((data) => {
+					setCart(data.data.attributes.products)
+				})
 			})
-		})
+		}
 	}, [])
-	
+
 	const uploadCart = (newCart) => {
 		let jwt = getCookie('jwt')
 		if (!jwt) { return }
