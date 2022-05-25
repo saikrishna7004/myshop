@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }) {
 						'Authorization': 'Bearer ' + jwt
 					},
 				}).then(data => data.json()).then((data) => {
-					setCart(data.data.attributes.products)
+					setCart(data.data[0].attributes.products)
 				})
 			})
 		}
