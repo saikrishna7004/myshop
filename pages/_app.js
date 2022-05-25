@@ -12,21 +12,21 @@ function MyApp({ Component, pageProps }) {
 	const uploadCart = (newCart) => {
 		let jwt = getCookie('jwt')
 		if(!jwt){ return }
-		fetch('http://localhost:1337/api/users/me', {
+		fetch(process.env.URL+'/api/users/me', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
 				'Authorization': 'Bearer ' + jwt
 			},
 		}).then(data => data.json()).then((user) => {
-			fetch('http://localhost:1337/api/carts/?filters[username]=' + user.username, {
+			fetch(process.env.URL+'/api/carts/?filters[username]=' + user.username, {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
 					'Authorization': 'Bearer ' + jwt
 				},
 			}).then(() => {
-				fetch('http://localhost:1337/api/carts/' + user.id, {
+				fetch(process.env.URL+'/api/carts/' + user.id, {
 					method: 'PUT',
 					body: JSON.stringify({
 						"data": { "products": newCart }

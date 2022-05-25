@@ -1,9 +1,21 @@
+import Error from 'next/error'
 import Head from 'next/head'
 import Link from 'next/link'
 import React, { useEffect } from 'react'
 
 const Products = (props) => {
-
+	if(!props.products.data){
+		return (
+			<>
+			<Head>
+				<title>eCommerce - Products</title>
+			</Head>
+			<section className="text-gray-600 body-font">
+			<Error statusCode={props.products.error.status} />
+			</section>
+			</>
+		)
+	}
 	return (
 		<>
 		<Head>
@@ -22,7 +34,7 @@ const Products = (props) => {
 				return (
 					<div className="xl:w-1/4 md:w-1/2 p-4" key={item.id}>
 						<div className="bg-gray-100 p-6 rounded-lg">
-							<img className="h-40 rounded w-full object-contain object-center mb-6" src={"http://localhost:1337"+item.attributes.image.data.attributes.url} alt="content"/>
+							<img className="h-40 rounded w-full object-contain object-center mb-6" src={process.env.URL+item.attributes.image.data.attributes.url} alt="content"/>
 							<p className="tracking-widest text-indigo-600 text-xs font-medium title-font">Sponsored</p>
 							<h2 className="text-lg text-gray-900 font-medium title-font mb-2">{item.attributes.title}</h2>
 							<p className="leading-relaxed text-base">{item.attributes.description}</p>
@@ -45,11 +57,11 @@ const Products = (props) => {
 
 export async function getServerSideProps(context) {
 	let jwt = context.req.cookies.jwt
-	let a = await fetch("http://localhost:1337/api/products?populate=*", {
+	let a = await fetch(process.env.URL+"/api/products?populate=*", {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization': 'Bearer '+ (jwt?jwt:'da23661141c0185346e5ee32518cb259ea8ee2e14b778a04bb2b54d2ff15cf5fd3c6d45d478c44679ca17cae6f7d6383cddfe0dcbf6f5f415102ff85d856c5d254ec13cab261ead6f08aed0b8e31faa2f5dd09493b42fccf08808a149dab2d22a72df6d86d2d45035257c93478cac19354cae25278d36c95c92f331ff97065fc')
+			'Authorization': 'Bearer '+ (jwt?jwt:process.env.API_TOKEN)
 		},
 	})
 	let products = await a.json()

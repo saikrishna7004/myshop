@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 const Login = ({ setCookie, setCart, setReloadKey }) => {
 
     const [data, setData] = useState({ identifier: "", password: "" })
-    const [checked, setChecked] = useState(false);
+    const [checked, setChecked] = useState(false)
 
     const updateHandler = (e) => {
         setData({ ...data, [e.target.name]: e.target.value })
@@ -20,7 +20,7 @@ const Login = ({ setCookie, setCart, setReloadKey }) => {
     const loginHandler = async (e) => {
         e.preventDefault()
         try {
-            let dataFetch = await fetch("http://localhost:1337/api/auth/local", {
+            let dataFetch = await fetch(process.env.URL+"/api/auth/local", {
                 method: "POST",
                 body: JSON.stringify({
                     ...data
@@ -33,7 +33,7 @@ const Login = ({ setCookie, setCart, setReloadKey }) => {
             if (res.jwt) {
                 let expiry = checked?3:1
                 setCookie('jwt', res.jwt, expiry)
-                fetch('http://localhost:1337/api/carts/'+res.user.id, {
+                fetch(process.env.URL+'/api/carts/'+res.user.id, {
                     method: "GET",
                     headers: {
                         "Content-type": "application/json; charset=UTF-8",

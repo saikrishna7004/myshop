@@ -17,7 +17,7 @@ const Post = (props) => {
 		<section className="text-gray-600 body-font overflow-hidden">
 			<div className="container px-5 py-3 md:py-10 mx-auto">
 				<div className="lg:w-4/5 mx-auto flex flex-wrap">
-				<img alt="ecommerce" className="lg:w-1/2 w-full lg:h-auto h-64 object-contain object-center rounded" src={"http://localhost:1337"+data.image.data.attributes.url}/>
+				<img alt="ecommerce" className="lg:w-1/2 w-full lg:h-auto h-64 object-contain object-center rounded" src={process.env.URL+data.image.data.attributes.url}/>
 				<div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 mb-4">
 					<p className="text-sm title-font text-gray-500 tracking-widest">Sponsored</p>
 					<h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{data.title}</h1>
@@ -118,12 +118,13 @@ const Post = (props) => {
 }
 
 export async function getServerSideProps(context) {
+	let jwt = context.req.cookies.jwt
 	const  { slug } = context.params
-	let a = await fetch("http://localhost:1337/api/products?populate=*&filters[slug]=" + slug, {
+	let a = await fetch(process.env.URL+"/api/products?populate=*&filters[slug]=" + slug, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization': 'Bearer '+ context.req.cookies.jwt
+			'Authorization': 'Bearer '+ (jwt?jwt:process.env.API_TOKEN)
 		},
 	})
 	let products = await a.json()

@@ -8,6 +8,9 @@ const nextConfig = {
 		locales: ["en"],
 		defaultLocale: "en",
 	},
+	env: {
+		URL: process.env.URL,
+	}
 }
 
 module.exports = nextConfig
