@@ -33,16 +33,22 @@ const Login = ({ setCookie, setCart, setReloadKey }) => {
             if (res.jwt) {
                 let expiry = checked?3:1
                 setCookie('jwt', res.jwt, expiry)
-                fetch(process.env.URL+'/api/carts/'+res.user.id, {
-                    method: "GET",
+                fetch(process.env.URL + '/api/users/me', {
+                    method: 'GET',
                     headers: {
-                        "Content-type": "application/json; charset=UTF-8",
-                        "Authorization": "Bearer "+res.jwt
-                    }
-                }).then(data=>data.json()).then((data)=>{
-                    setCart(data.data.attributes.products)
-                    localStorage.setItem('cart', JSON.stringify(data.data.attributes.products))
-                    setReloadKey(Math.random())
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + res.jwt
+                    },
+                }).then(data => data.json()).then((user) => {
+                    fetch(process.env.URL + '/api/carts/?filters[username]=' + user.username, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + res.jwt
+                        },
+                    }).then(data=>data.json()).then((data)=>{
+                        setCart(data.data.attributes.products)
+                    })
                 })
                 Router.push("/").then(()=>{
                     toast.success('Login Successful')
