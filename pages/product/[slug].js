@@ -106,7 +106,7 @@ const Post = (props) => {
 					</button>
 					</div>
 
-					<Link href="/checkout"><a className="flex mt-4 ml-auto w-fit text-white bg-indigo-600 border-0 py-2 px-3 focus:outline-none hover:bg-indigo-700 rounded">Ckeckout</a></Link>
+					<Link href="/checkout"><a className="flex mt-4 ml-auto w-fit text-white bg-indigo-600 border-0 py-2 px-3 focus:outline-none hover:bg-indigo-700 rounded">Checkout</a></Link>
 
 				</div>
 				</div>
