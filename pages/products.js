@@ -19,7 +19,7 @@ const Products = (props) => {
 	return (
 		<>
 		<Head>
-			<title>eCommerce - Products</title>
+			<title>Products - MyShop</title>
 		</Head>
 		<section className="text-gray-600 body-font">
 		<div className="container px-5 py-2 mx-auto">
