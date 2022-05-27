@@ -12,7 +12,7 @@ const Post = (props) => {
 	return (
 		<>
 		<Head>
-			<title>eCommerce - {data.title}</title>
+			<title>{data.title} - MyShop</title>
 		</Head>
 		<section className="text-gray-600 body-font overflow-hidden">
 			<div className="container px-5 py-3 md:py-10 mx-auto">

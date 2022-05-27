@@ -6,7 +6,7 @@ const Contact = (props) => {
 	return (
 		<>
 			<Head>
-				<title>eCommerce - Contact Us</title>
+				<title>Contact Us - MyShop</title>
 			</Head>
 			<div className='container mx-auto'>Contact</div>
 		</>

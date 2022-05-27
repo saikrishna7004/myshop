@@ -8,7 +8,7 @@ const Products = (props) => {
 		return (
 			<>
 			<Head>
-				<title>eCommerce - Products</title>
+				<title>Products - MyShop</title>
 			</Head>
 			<section className="text-gray-600 body-font">
 			<Error statusCode={props.products.error.status} />

@@ -1,11 +1,7 @@
-import React from 'react'
-import { useState } from 'react'
-import Router from 'next/router'
-import jwtDecode from 'jwt-decode'
-import { toast } from 'react-toastify';
-import Head from 'next/head';
+import React, { useState } from 'react'
+import Head from 'next/head'
 
-const Login = ({ setCookie, setCart, setReloadKey }) => {
+const Signup = () => {
 
     const [data, setData] = useState({ identifier: "", password: "" })
     const [checked, setChecked] = useState(false)
@@ -18,65 +14,23 @@ const Login = ({ setCookie, setCart, setReloadKey }) => {
         setChecked(e.target.checked)
     }
 
-    const loginHandler = async (e) => {
-        e.preventDefault()
-        try {
-            let dataFetch = await fetch(process.env.URL+"/api/auth/local", {
-                method: "POST",
-                body: JSON.stringify({
-                    ...data
-                }),
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8",
-                }
-            })
-            let res = await dataFetch.json()
-            if (res.jwt) {
-                let expiry = checked?3:1
-                setCookie('jwt', res.jwt, expiry)
-                fetch(process.env.URL + '/api/users/me', {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + res.jwt
-                    },
-                }).then(data => data.json()).then((user) => {
-                    fetch(process.env.URL + '/api/carts/?filters[username]=' + user.username, {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': 'Bearer ' + res.jwt
-                        },
-                    }).then(data=>data.json()).then((data)=>{
-                        setCart(data.data[0].attributes.products)
-                    })
-                })
-                Router.push("/").then(()=>{
-                    toast.success('Login Successful')
-                })
-            }
-        } catch (err) {
-            toast.error("Internal Server Error")
-        }
-    }
-
     return (
         <>
 		<Head>
-            <title>Login - MyShop</title>
+            <title>Signup - MyShop</title>
 		</Head>
         <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full space-y-8">
                 <div>
                     <img className="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow" />
-                    <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to Your Account</h2>
+                    <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Create Your Account</h2>
                     <p className="mt-2 text-center text-sm text-gray-600">
                         Or
-                        <a href="/signup" className="font-medium text-indigo-600 hover:text-indigo-500"> Create Your Account </a>
+                        <a href="/login" className="font-medium text-indigo-600 hover:text-indigo-500"> Sign in to Your Account </a>
                         Now!
                     </p>
                 </div>
-                <form className="mt-8 space-y-6" onSubmit={loginHandler}>
+                <form className="mt-8 space-y-6" >
                     <input type="hidden" name="remember" value="true" />
                     <div className="rounded-md shadow-sm -space-y-px">
                         <div>
@@ -115,21 +69,7 @@ const Login = ({ setCookie, setCart, setReloadKey }) => {
         </div>
         </>
     )
+
 }
 
-export async function getServerSideProps(context) {
-    if (context.req.cookies.jwt) {
-        return {
-            redirect: {
-                destination: '/',
-                permanent: false,
-            },
-        }
-    }
-
-    return {
-        props: {}, // will be passed to the page component as props
-    }
-}
-
-export default Login
+export default Signup

@@ -7,7 +7,7 @@ export default function Home(props) {
 	return (
 		<>	
 			<Head>
-				<title>eCommerce - Home</title>
+				<title>Home - MyShop</title>
 			</Head>
 			<div className='container mx-auto'>
 				This is Home Page of this eCommerce Website

@@ -14,7 +14,7 @@ const Checkout = (props) => {
 	return (
 		<>
 			<Head>
-				<title>eCommerce - Checkout</title>
+				<title>Checkout - MyShop</title>
 			</Head>
 			{/* <div className='container md:mx-auto mx-4 mb-4 overflow-auto' style={{ color: "green", fontSize: "20px", fontWeight: "bold" }}>
 				<pre><code>{JSON.stringify(props.cart, null, 4)}</code></pre>

@@ -6,7 +6,7 @@ const About = (props) => {
 	return (
 		<>
 			<Head>
-				<title>eCommerce - About</title>
+				<title>About - MyShop</title>
 			</Head>
 			<div className='container mx-auto'>About</div>
 		</>
