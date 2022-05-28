@@ -27,7 +27,8 @@ const Forgot = ({ recaptcha, serverUrl }) => {
 
 	let router = useRouter()
 
-	const resetPass = async ()=>{
+	const resetPass = async (e)=>{
+		e.preventDefault()
 		let dataFetch = await fetch(serverUrl+"/api/auth/reset-password", {
 			method: "POST",
 			body: JSON.stringify({
