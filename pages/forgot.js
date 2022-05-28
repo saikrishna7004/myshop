@@ -11,7 +11,7 @@ const Forgot = ({ recaptcha, serverUrl }) => {
 
     const [email, setEmail] = useState('')
 	const [captcha, setCaptcha] = useState('')
-	const [data, setData] = useState({email: '', password: '', cpassword: ''})
+	const [data, setData] = useState({password: '', cpassword: ''})
 
     const updateHandlerEmail = (e) => {
         setEmail(e.target.value)
@@ -19,6 +19,7 @@ const Forgot = ({ recaptcha, serverUrl }) => {
 
     const updateHandler = (e) => {
         setData({...data, [e.target.name]: e.target.value})
+		console.log(data)
     }
 
     const recaptchaChange = (e) => {
@@ -30,12 +31,17 @@ const Forgot = ({ recaptcha, serverUrl }) => {
 	const resetPass = async (e)=>{
 		e.preventDefault()
 		let code = router.query.code
+		console.log({
+			code: code,
+			password: password,
+			passwordConfirmation: cpassword
+		})
 		let dataFetch = await fetch(serverUrl+"/api/auth/reset-password", {
 			method: "POST",
 			body: JSON.stringify({
 				code: code,
-				password: password,
-				passwordConfirmation: cpassword
+				password: password.value,
+				passwordConfirmation: cpassword.value
 			}),
 			headers: {
 				"Content-type": "application/x-www-form-urlencoded",
