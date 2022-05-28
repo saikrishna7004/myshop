@@ -6,6 +6,7 @@ import jwtDecode from 'jwt-decode'
 import { toast } from 'react-toastify';
 import Head from 'next/head';
 import ReCAPTCHA from "react-google-recaptcha"
+import Router from 'next/router'
 
 const Forgot = ({ recaptcha, serverUrl }) => {
 
@@ -46,7 +47,7 @@ const Forgot = ({ recaptcha, serverUrl }) => {
 		}
 		else{
 			toast.success("Password Reset Successful")
-			router.push('/login')
+			Router.push('/login')
 		}
 	}
 
