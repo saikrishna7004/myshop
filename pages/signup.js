@@ -41,6 +41,9 @@ const Signup = ({ recaptcha, serverUrl }) => {
 		else if(result.error=="timeout-or-duplicate"){
 			toast.error("Captcha timeout")
 		}
+        else if(result.error=="Email is already taken"){
+            toast.error("Email is already taken")
+        }
 		else{
 			toast.error("An error has occured")
 		}
