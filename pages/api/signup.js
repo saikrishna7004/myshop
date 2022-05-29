@@ -29,10 +29,10 @@ export default async function handler(req, res) {
 			if(result.jwt){
 				return res.status(200).json({success: true, error: err, msg: "User Created Successfully"})
 			}
-            else if(result.user){
+            if(result.user){
                 return res.status(200).json({success: true, error: err, msg: "Instructions have been sent to your Email"})
             }
-            else if(result.error){
+            if(result.error){
                 err = result.error.message
                 return res.json({success: false, error: err})
             }
