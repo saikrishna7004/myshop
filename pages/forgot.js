@@ -6,6 +6,7 @@ import jwtDecode from 'jwt-decode'
 import { toast } from 'react-toastify';
 import Head from 'next/head';
 import ReCAPTCHA from "react-google-recaptcha"
+import axios from 'axios'
 
 const Forgot = ({ recaptcha, serverUrl }) => {
 
@@ -36,16 +37,21 @@ const Forgot = ({ recaptcha, serverUrl }) => {
 			password: password,
 			passwordConfirmation: cpassword
 		})
-		let dataFetch = await fetch(serverUrl+"/api/auth/reset-password", {
-			method: "POST",
-			body: JSON.stringify({
-				code: code,
-				password: password.value,
-				passwordConfirmation: cpassword.value
-			}),
-			headers: {
-				"Content-type": "application/json",
-			}
+		// let dataFetch = await fetch(serverUrl+"/api/auth/reset-password", {
+		// 	method: "POST",
+		// 	body: JSON.stringify({
+		// 		code: code,
+		// 		password: password.value,
+		// 		passwordConfirmation: cpassword.value
+		// 	}),
+		// 	headers: {
+		// 		"Content-type": "application/json",
+		// 	}
+		// })
+		let dataFetch = await axios.post(serverUrl+'/api/auth/reset-password', {
+			code: code, // code contained in the reset link of step 3.
+			password: password.value,
+			passwordConfirmation: password.value,
 		})
 		let result = await dataFetch.json()
 		console.log(result)
