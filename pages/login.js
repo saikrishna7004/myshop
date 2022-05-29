@@ -33,7 +33,7 @@ const Login = ({ setCookie, setCart, setReloadKey }) => {
             let res = await dataFetch.json()
             console.log(res)
             if(res.error){
-                if(res.error.message==="ValidationError"){
+                if(res.error.name==="ValidationError"){
                     toast.error("Incorrect username or password")
                 }
             }
