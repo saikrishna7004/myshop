@@ -44,6 +44,9 @@ const Signup = ({ recaptcha, serverUrl }) => {
         else if(result.error=="Email is already taken"){
             toast.error("Email is already taken")
         }
+        else if(result.error=="An error occurred during account creation"){
+            toast.error("Username already exists")
+        }
 		else{
 			toast.error("An error has occured")
 		}
