@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { toast } from 'react-toastify'
 import ReCAPTCHA from "react-google-recaptcha"
+import Router from 'next/router'
 
 const Signup = ({ recaptcha, serverUrl }) => {
 
@@ -35,20 +36,25 @@ const Signup = ({ recaptcha, serverUrl }) => {
 		})
 		let result = await dataFetch.json()
         console.log(result)
-		if(result.success)(
+		if(result.success){
 			toast.success(result.msg)
-		)
+            Router.push('/login')
+        }
 		else if(result.error=="timeout-or-duplicate"){
 			toast.error("Captcha timeout")
+            window.grecaptcha.reset()
 		}
         else if(result.error=="Email is already taken"){
             toast.error("Email is already taken")
+            window.grecaptcha.reset()
         }
         else if(result.error=="An error occurred during account creation"){
             toast.error("Username already exists")
+            window.grecaptcha.reset()
         }
 		else{
 			toast.error("An error has occured")
+            window.grecaptcha.reset()
 		}
     }
 
