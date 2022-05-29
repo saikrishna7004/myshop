@@ -39,7 +39,7 @@ const Forgot = ({ recaptcha, serverUrl }) => {
 		let result = await axios.post(serverUrl+'/api/auth/reset-password', {
 			code: code, // code contained in the reset link of step 3.
 			password: password.value,
-			passwordConfirmation: password.value,
+			passwordConfirmation: cpassword.value,
 		})
 		console.log(result)
 		if(result.error){
