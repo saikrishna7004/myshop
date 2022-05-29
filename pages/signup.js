@@ -2,21 +2,48 @@ import React, { useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { toast } from 'react-toastify'
+import ReCAPTCHA from "react-google-recaptcha"
 
-const Signup = () => {
+const Signup = ({ recaptcha, serverUrl }) => {
 
     const [data, setData] = useState({ email: "", password: "", username: "", cpassword: "" })
+	const [captcha, setCaptcha] = useState('')
 
     const updateHandler = (e) => {
         setData({ ...data, [e.target.name]: e.target.value })
     }
 
-    const signupHandler = (e)=>{
+    const recaptchaChange = (e) => {
+        setCaptcha(e)
+    }
+
+    const signupHandler = async (e)=>{
         e.preventDefault()
         if(data.password!=data.cpassword){
             toast.error("Password and Confirm Password doesn't match")
 			return
         }
+		if(!captcha){
+			return toast.error("Please Verify Captcha")
+		}
+        let dataFetch = await fetch("/api/signup", {
+			method: "POST",
+			body: `email=${data.email}&g-recaptcha-response=${captcha}&username=${data.username}&password=${data.password}`,
+			headers: {
+				"Content-type": "application/x-www-form-urlencoded",
+			}
+		})
+		let result = await dataFetch.json()
+        console.log(result)
+		if(result.success)(
+			toast.success("Instructions have been sent to your Email")
+		)
+		else if(result.error=="timeout-or-duplicate"){
+			toast.error("Captcha timeout")
+		}
+		else{
+			toast.error("An error has occured")
+		}
     }
 
     return (
@@ -57,7 +84,7 @@ const Signup = () => {
                         <div className="pt-2 text-red-500">Passwords doesn't match</div>
                         }
                     </div>
-
+					<ReCAPTCHA sitekey={recaptcha} onChange={recaptchaChange} />
                     <div>
                         <button type="submit" className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                             <span className="absolute left-0 inset-y-0 flex items-center pl-3">
@@ -76,4 +103,19 @@ const Signup = () => {
 
 }
 
+export async function getServerSideProps(context) {
+    if (context.req.cookies.jwt) {
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false,
+            },
+        }
+    }
+	let recaptcha = process.env.RECAPTCHA_SITE_KEY
+	let serverUrl = process.env.URL
+    return {
+        props: {recaptcha, serverUrl}, // will be passed to the page component as props
+    }
+}
 export default Signup
