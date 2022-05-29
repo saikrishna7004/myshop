@@ -48,8 +48,9 @@ function MyApp({ Component, pageProps }) {
 					'Content-Type': 'application/json',
 					'Authorization': 'Bearer ' + jwt
 				},
-			}).then(() => {
-				fetch(process.env.URL + '/api/carts/' + user.id, {
+			}).then(data=>data.json()).then((data) => {
+				console.log(data.data[0].id)
+				fetch(process.env.URL + '/api/carts/' + data.data[0].id, {
 					method: 'PUT',
 					body: JSON.stringify({
 						"data": { "products": newCart }
