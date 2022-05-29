@@ -32,6 +32,11 @@ const Login = ({ setCookie, setCart, setReloadKey }) => {
             })
             let res = await dataFetch.json()
             console.log(res)
+            if(res.error){
+                if(res.error.message==="ValidationError"){
+                    toast.error("Incorrect username or password")
+                }
+            }
             if (res.jwt) {
                 let expiry = checked?3:1
                 setCookie('jwt', res.jwt, expiry)

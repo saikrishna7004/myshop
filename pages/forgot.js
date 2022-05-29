@@ -48,12 +48,11 @@ const Forgot = ({ recaptcha, serverUrl }) => {
 		// 		"Content-type": "application/json",
 		// 	}
 		// })
-		let dataFetch = await axios.post(serverUrl+'/api/auth/reset-password', {
+		let result = await axios.post(serverUrl+'/api/auth/reset-password', {
 			code: code, // code contained in the reset link of step 3.
 			password: password.value,
 			passwordConfirmation: password.value,
 		})
-		let result = await dataFetch
 		console.log(result)
 		if(result.error){
 			toast.error(result.error.message)
