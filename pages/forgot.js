@@ -44,7 +44,7 @@ const Forgot = ({ recaptcha, serverUrl }) => {
 				passwordConfirmation: cpassword.value
 			}),
 			headers: {
-				"Content-type": "application/x-www-form-urlencoded",
+				"Content-type": "application/json",
 			}
 		})
 		let result = await dataFetch.json()
