@@ -36,7 +36,7 @@ const Signup = ({ recaptcha, serverUrl }) => {
 		let result = await dataFetch.json()
         console.log(result)
 		if(result.success)(
-			toast.success("Instructions have been sent to your Email")
+			toast.success(result.msg)
 		)
 		else if(result.error=="timeout-or-duplicate"){
 			toast.error("Captcha timeout")
