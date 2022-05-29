@@ -3,7 +3,8 @@ import { useState } from 'react'
 import Router from 'next/router'
 import jwtDecode from 'jwt-decode'
 import { toast } from 'react-toastify';
-import Head from 'next/head';
+import Head from 'next/head'
+import Link from 'next/link'
 
 const Login = ({ setCookie, setCart, setReloadKey }) => {
 
@@ -78,7 +79,7 @@ const Login = ({ setCookie, setCart, setReloadKey }) => {
                     <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to Your Account</h2>
                     <p className="mt-2 text-center text-sm text-gray-600">
                         Or
-                        <a href="/signup" className="font-medium text-indigo-600 hover:text-indigo-500"> Create Your Account </a>
+                        <Link href="/signup"><a className="font-medium text-indigo-600 hover:text-indigo-500"> Create Your Account </a></Link>
                         Now!
                     </p>
                 </div>
@@ -102,7 +103,7 @@ const Login = ({ setCookie, setCart, setReloadKey }) => {
                         </div>
 
                         <div className="text-sm">
-                            <a href="/forgot" className="font-medium text-indigo-600 hover:text-indigo-500"> Forgot your password? </a>
+                            <Link href="/forgot"><a className="font-medium text-indigo-600 hover:text-indigo-500"> Forgot your password? </a></Link>
                         </div>
                     </div>
 
