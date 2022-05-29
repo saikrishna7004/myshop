@@ -34,7 +34,7 @@ const Login = ({ setCookie, setCart, setReloadKey }) => {
             console.log(res)
             if(res.error){
                 if(res.error.name==="ValidationError"){
-                    toast.error("Incorrect username or password")
+                    toast.error(res.error.message)
                 }
             }
             if (res.jwt) {
@@ -86,8 +86,8 @@ const Login = ({ setCookie, setCart, setReloadKey }) => {
                     <input type="hidden" name="remember" value="true" />
                     <div className="rounded-md shadow-sm -space-y-px">
                         <div>
-                            <label htmlFor="identifier" className="sr-only">Username</label>
-                            <input id="identifier" name="identifier" type="text" onChange={updateHandler} value={data.identifier} required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Username" />
+                            <label htmlFor="identifier" className="sr-only">Username or Email</label>
+                            <input id="identifier" name="identifier" type="text" onChange={updateHandler} value={data.identifier} required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Username or Email" />
                         </div>
                         <div>
                             <label htmlFor="password" className="sr-only">Password</label>
