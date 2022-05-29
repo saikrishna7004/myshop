@@ -53,7 +53,7 @@ const Forgot = ({ recaptcha, serverUrl }) => {
 			password: password.value,
 			passwordConfirmation: password.value,
 		})
-		let result = await dataFetch.json()
+		let result = await dataFetch
 		console.log(result)
 		if(result.error){
 			toast.error(result.error.message)
