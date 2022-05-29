@@ -31,8 +31,7 @@ const Forgot = ({ recaptcha, serverUrl }) => {
 
 	const resetPass = async (e)=>{
 		e.preventDefault()
-		console.log(password, cpassword)
-		if(password!=cpassword){
+		if(password.value!=cpassword.value){
 			toast.error("Password and Confirm Password doesn't match")
 			return
 		}
