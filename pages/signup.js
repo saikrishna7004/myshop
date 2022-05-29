@@ -1,18 +1,22 @@
 import React, { useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
+import { toast } from 'react-toastify'
 
 const Signup = () => {
 
     const [data, setData] = useState({ email: "", password: "", username: "", cpassword: "" })
-    const [checked, setChecked] = useState(false)
 
     const updateHandler = (e) => {
         setData({ ...data, [e.target.name]: e.target.value })
     }
 
-    const checkedHandler = (e)=>{
-        setChecked(e.target.checked)
+    const signupHandler = (e)=>{
+        e.preventDefault()
+        if(data.password!=data.cpassword){
+            toast.error("Password and Confirm Password doesn't match")
+			return
+        }
     }
 
     return (
@@ -31,8 +35,7 @@ const Signup = () => {
                         Now!
                     </p>
                 </div>
-                <form className="mt-8 space-y-6" method='post' action=''>
-                    <input type="hidden" name="remember" value="true" />
+                <form className="mt-8 space-y-6" onSubmit={signupHandler}>
                     <div className="rounded-md shadow-sm -space-y-px">
                         <div>
                             <label htmlFor="email" className="sr-only">Email</label>

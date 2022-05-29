@@ -31,23 +31,11 @@ const Forgot = ({ recaptcha, serverUrl }) => {
 
 	const resetPass = async (e)=>{
 		e.preventDefault()
+		if(password!=cpassword){
+			toast.error("Password and Confirm Password doesn't match")
+			return
+		}
 		let code = router.query.code
-		console.log({
-			code: code,
-			password: password,
-			passwordConfirmation: cpassword
-		})
-		// let dataFetch = await fetch(serverUrl+"/api/auth/reset-password", {
-		// 	method: "POST",
-		// 	body: JSON.stringify({
-		// 		code: code,
-		// 		password: password.value,
-		// 		passwordConfirmation: cpassword.value
-		// 	}),
-		// 	headers: {
-		// 		"Content-type": "application/json",
-		// 	}
-		// })
 		let result = await axios.post(serverUrl+'/api/auth/reset-password', {
 			code: code, // code contained in the reset link of step 3.
 			password: password.value,
