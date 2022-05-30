@@ -38,6 +38,12 @@ const Login = ({ setCookie, setCart, setReloadKey }) => {
                     toast.error(res.error.message)
                 }
             }
+            if(res.user){
+                if(!res.user.confirmed){
+                    toast.error("Please Confirm your account with Email sent")
+                    return
+                }
+            }
             if (res.jwt) {
                 let expiry = checked?3:1
                 setCookie('jwt', res.jwt, expiry)

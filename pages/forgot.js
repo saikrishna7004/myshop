@@ -36,19 +36,21 @@ const Forgot = ({ recaptcha, serverUrl }) => {
 			return
 		}
 		let code = router.query.code
-		let result = await axios.post(serverUrl+'/api/auth/reset-password', {
+		let result = axios.post(serverUrl+'/api/auth/reset-password', {
 			code: code, // code contained in the reset link of step 3.
 			password: password.value,
 			passwordConfirmation: cpassword.value,
-		})
-		console.log(result)
-		if(result.error){
-			toast.error(result.error.message)
-		}
-		else{
+		}).then(()=>{
 			toast.success("Password Reset Successful")
 			Router.push('/login')
-		}
+		}).catch((e)=>{
+			if(e.response.data.error.message=="Incorrect code provided"){
+				toast.error("Incorrect link or link expired")
+			}
+			else{
+				toast.error("An error occured")
+			}
+		})
 	}
 
 	if(router.query.code){
