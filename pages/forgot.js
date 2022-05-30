@@ -73,11 +73,11 @@ const Forgot = ({ recaptcha, serverUrl }) => {
 						<div className="rounded-md shadow-sm -space-y-px">
 							<div>
 								<label htmlFor="password" className="sr-only">Password</label>
-								<input id="password" name="password" type="password" onChange={updateHandler} value={data.password} autoComplete="password" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Password" />
+								<input id="password" pattern='.{6,}' title='Password must be 6 chars long' name="password" type="password" onChange={updateHandler} value={data.password} autoComplete="password" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Password" />
 							</div>
 							<div>
 								<label htmlFor="cpassword" className="sr-only">Confirm Password</label>
-								<input id="cpassword" name="cpassword" type="password" onChange={updateHandler} value={data.cpassword} autoComplete="password" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Confirm Password" />
+								<input id="cpassword" pattern='.{6,}' title='Password must be 6 chars long' name="cpassword" type="password" onChange={updateHandler} value={data.cpassword} autoComplete="password" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Confirm Password" />
 							</div>
 							{data.password && data.password != data.cpassword && 
 							<div className="pt-2 text-red-500">Passwords doesn't match</div>
