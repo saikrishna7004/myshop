@@ -36,7 +36,7 @@ const Forgot = ({ recaptcha, serverUrl }) => {
 			return
 		}
 		let code = router.query.code
-		let result = axios.post(serverUrl+'/api/auth/reset-password', {
+		axios.post(serverUrl+'/api/auth/reset-password', {
 			code: code, // code contained in the reset link of step 3.
 			password: password.value,
 			passwordConfirmation: cpassword.value,
