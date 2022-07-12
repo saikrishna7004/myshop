@@ -140,6 +140,7 @@ function MyApp({ Component, pageProps }) {
 		<Head>
 			<meta name="description" content="Website made by Sai Krishna Karnati using Next.js, React.js and Strapi" />
 			<link rel='manifest' href='/manifest.json' />
+			<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png"/>
 		</Head>
 		<Navbar key={reloadKey} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} setCookie={setCookie} getCookie={getCookie} />
 		<Component {...pageProps} cart={cart} setCart={setCart} setReloadKey={setReloadKey} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} setCookie={setCookie} getCookie={getCookie} />
