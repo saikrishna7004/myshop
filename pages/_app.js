@@ -142,6 +142,7 @@ function MyApp({ Component, pageProps }) {
 			<link rel='manifest' href='/manifest.json' />
 			<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png"/>
 			<meta name="theme-color" content="#000000"/>
+			<script src="register-sw.js"></script>
 		</Head>
 		<Navbar key={reloadKey} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} setCookie={setCookie} getCookie={getCookie} />
 		<Component {...pageProps} cart={cart} setCart={setCart} setReloadKey={setReloadKey} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} setCookie={setCookie} getCookie={getCookie} />
