@@ -3,7 +3,7 @@ const withPWA = require('next-pwa');
 
 const nextConfig = withPWA({
 	images: {
-		domains: ['localhost'],
+		domains: ['localhost', 'saikrishna1.ddns.net'],
 	},
 	i18n: {
 		locales: ["en"],
