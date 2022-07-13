@@ -3,7 +3,7 @@ var cacheName = 'myapp-3n';
 var filesToCache = [
     '/favicon.ico',
     '/manifest.json',
-    '_offline.js'
+    '/_offline'
 ];
 
 

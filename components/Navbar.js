@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import React, {useState, useEffect} from 'react'
 
 const Navbar = (props) => {
@@ -14,7 +15,7 @@ const Navbar = (props) => {
             <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
                 <Link href="/">
                     <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-                        <img src="/logo.svg" alt="Logo" style={{ height: "34px" }} />
+                        <Image src="/logo.svg" alt="Logo" style={{ height: "34px" }} height='34' width={34} />
                         <span className="ml-3 text-xl">My Shop</span>
                     </a>
                 </Link>

@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import Head from 'next/head';
 import ReCAPTCHA from "react-google-recaptcha"
 import axios from 'axios'
+import Image from 'next/image'
 
 const Forgot = ({ recaptcha, serverUrl }) => {
 
@@ -62,7 +63,9 @@ const Forgot = ({ recaptcha, serverUrl }) => {
 			<div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
 				<div className="max-w-md w-full space-y-8">
 					<div>
-						<img className="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow" />
+						<span className='mx-auto h-12 w-auto'>
+							<Image src="/logo.svg" alt="Logo" height={60} width={450} />
+						</span>
 						<h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Reset your Password</h2>
 						<p className="mt-2 text-center text-sm text-gray-600">
 							Click here to
@@ -134,8 +137,10 @@ const Forgot = ({ recaptcha, serverUrl }) => {
         <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full space-y-8">
                 <div>
-                    <img className="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow" />
-                    <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Forgot Password</h2>
+                    <span className='mx-auto h-12 w-auto'>
+                        <Image src="/logo.svg" alt="Logo" height={60} width={450} />
+                    </span>
+                    <h2 className="mt-4 text-center text-3xl font-extrabold text-gray-900">Forgot Password</h2>
                     <p className="mt-2 text-center text-sm text-gray-600">
                         Enter your email to send activtion link to your email
                     </p>

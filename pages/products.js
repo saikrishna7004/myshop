@@ -1,6 +1,7 @@
 import Error from 'next/error'
 import Head from 'next/head'
 import Link from 'next/link'
+import Image from 'next/image'
 import React, { useEffect } from 'react'
 
 const Products = (props) => {
@@ -34,8 +35,10 @@ const Products = (props) => {
 				return (
 					<div className="xl:w-1/4 md:w-1/2 p-4" key={item.id}>
 						<div className="bg-gray-100 p-6 rounded-lg">
-							<img className="h-40 rounded w-full object-contain object-center mb-6" src={process.env.URL+item.attributes.image.data.attributes.url} alt="content"/>
-							<p className="tracking-widest text-indigo-600 text-xs font-medium title-font">Sponsored</p>
+							<span className="ml-3 mb-6">
+							<Image className="h-40 rounded w-full object-contain object-center" src={process.env.URL+item.attributes.image.data.attributes.url} alt="content" height='200' width='200'/>
+							</span>
+							<p className="tracking-widest text-indigo-600 text-xs font-medium title-font mt-6">Sponsored</p>
 							<h2 className="text-lg text-gray-900 font-medium title-font mb-2">{item.attributes.title}</h2>
 							<p className="leading-relaxed text-base">{item.attributes.description}</p>
 							<Link href={`product/${item.attributes.slug}`}>

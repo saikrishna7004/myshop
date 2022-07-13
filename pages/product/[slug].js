@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
+import Image from 'next/image'
 import React, { useEffect } from 'react'
 import { toast } from 'react-toastify'
 
@@ -8,6 +9,7 @@ const Post = (props) => {
 	const router = useRouter()
 	const { slug } = router.query
 	const data = props.products.data[0].attributes
+	console.log(data.image.data.attributes)
 
 	return (
 		<>
@@ -17,7 +19,9 @@ const Post = (props) => {
 		<section className="text-gray-600 body-font overflow-hidden">
 			<div className="container px-5 py-3 md:py-10 mx-auto">
 				<div className="lg:w-4/5 mx-auto flex flex-wrap">
-				<img alt="ecommerce" className="lg:w-1/2 w-full lg:h-auto h-64 object-contain object-center rounded" src={process.env.URL+data.image.data.attributes.url}/>
+				<span className="lg:w-1/2 object-contain object-center rounded">
+				<Image alt="ecommerce" src={process.env.URL+data.image.data.attributes.url} height={data.image.data.attributes.height} width={data.image.data.attributes.width}/>
+				</span>
 				<div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 mb-4">
 					<p className="text-sm title-font text-gray-500 tracking-widest">Sponsored</p>
 					<h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{data.title}</h1>

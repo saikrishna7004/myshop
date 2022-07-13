@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
+import Link from 'next/link'
 
 const Checkout = (props) => {
 	const [total, setTotal] = useState(0)
@@ -66,7 +67,8 @@ const Checkout = (props) => {
 					)
 				})}
 				{(props.cart.length === 0) ? ('') : (<div className='mb-8 text-2xl'><b>Total Amount: </b>₹ {total}</div>)}
-				{(props.cart.length === 0 || !props.getCookie('jwt')) ? ('') : (
+				{(props.cart.length === 0 || !props.getCookie('jwt')) ? (<div className='text-xl'><Link href="/login"><a className='text-blue-900 font-bold'>Login</a></Link> to checkout and place order</div>
+				) : (
 					<button onClick={() => { setCheckout(false) }} className="text-white bg-indigo-600 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-700 rounded">Checkout</button>
 				)}
 			</div>
