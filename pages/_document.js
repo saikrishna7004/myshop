@@ -9,7 +9,7 @@ export default function Document() {
                 <link rel='manifest' href='/manifest.json' />
                 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png"/>
                 <meta name="theme-color" content="#000000"/>
-                <Script src="register-sw.js"></Script>
+                <script src="register-sw.js" defer></script>
             </Head>
             <body>
                 <Main />

@@ -51,6 +51,32 @@
             "purpose": "maskable"
         }
     ],
+    "shortcuts": [
+        {
+            "name": "MyShop Cart",
+            "description": "MyShop Shopping Cart",
+            "url": "/checkout",
+            "icons": [
+                {
+                    "src": "/logo.svg",
+                    "type": "image/svg+xml",
+                    "purpose": "any"
+                }
+            ]
+        },
+        {
+            "name": "MyShop Products",
+            "description": "MyShop Shopping Products",
+            "url": "/products",
+            "icons": [
+                {
+                    "src": "/logo.svg",
+                    "type": "image/svg+xml",
+                    "purpose": "any"
+                }
+            ]
+        }
+    ],
     "start_url": "/",
     "background_color": "#FFFFFF",
     "display": "standalone",

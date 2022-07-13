@@ -2,11 +2,11 @@ import Link from 'next/link'
 import Image from 'next/image'
 import React, {useState, useEffect} from 'react'
 
-const Navbar = (props) => {
+const Navbar = ({getCookie, cart}) => {
 
     const [jwt, setJwt] = useState(false)
     useEffect(() => {
-        setJwt(props.getCookie('jwt')!='')
+        setJwt(getCookie('jwt')!='')
     }, [])
      
 
@@ -24,7 +24,7 @@ const Navbar = (props) => {
                     <Link href="/about"><a className="mr-5 hover:text-gray-900">About</a></Link>
                     <Link href="/products"><a className="mr-5 hover:text-gray-900">Products</a></Link>
                     <Link href="/contact"><a className="mr-5 hover:text-gray-900">Contact Us</a></Link>
-                    <Link href="/checkout"><a className="mr-5 hover:text-gray-900">Cart({props.cart.length})</a></Link>
+                    <Link href="/checkout"><a className="mr-5 hover:text-gray-900">Cart({cart.length})</a></Link>
                 </nav>
                 {
                     jwt?

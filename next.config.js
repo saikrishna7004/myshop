@@ -15,7 +15,8 @@ const nextConfig = withPWA({
 	pwa: {
 		dest: 'public',
 		register: true,
-		skipWaiting: true
+		skipWaiting: true,
+		mode: 'production'
 	},
 	reactStrictMode: true
 })

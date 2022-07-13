@@ -4,7 +4,6 @@ import Link from 'next/link'
 
 const Checkout = (props) => {
 	const [total, setTotal] = useState(0)
-	const [step, setStep] = useState(1)
 	const [checkout, setCheckout] = useState(true)
 	const [s1State, setS1State] = useState("")
 	const [s2State, setS2State] = useState("hidden")
@@ -44,7 +43,7 @@ const Checkout = (props) => {
 			</div> */}
 			<div className="container md:mx-auto mx-4 mb-4">
 				{(props.cart.length === 0) ? (
-					<div className='text-xl'><span>Cart Empty, </span><a className='text-blue-900 font-bold' href="/products">Add</a> a product now</div>
+					<div className='text-xl'><span>Cart Empty, </span><Link href="/products"><a className='text-blue-900 font-bold'>Add</a></Link> a product now</div>
 				) : (
 					<button onClick={() => { props.clearCart() }} className="mt-4 text-white bg-indigo-600 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-700 rounded">Clear Cart</button>
 				)}
@@ -67,8 +66,7 @@ const Checkout = (props) => {
 					)
 				})}
 				{(props.cart.length === 0) ? ('') : (<div className='mb-8 text-2xl'><b>Total Amount: </b>₹ {total}</div>)}
-				{(props.cart.length === 0 || !props.getCookie('jwt')) ? (<div className='text-xl'><Link href="/login"><a className='text-blue-900 font-bold'>Login</a></Link> to checkout and place order</div>
-				) : (
+				{(props.cart.length === 0 || !props.getCookie('jwt')) ? ('') : (
 					<button onClick={() => { setCheckout(false) }} className="text-white bg-indigo-600 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-700 rounded">Checkout</button>
 				)}
 			</div>

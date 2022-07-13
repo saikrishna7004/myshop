@@ -1,11 +1,8 @@
 import Navbar from '../components/Navbar'
 import '../styles/globals.css'
-import Head from 'next/head'
 import { useState, useEffect } from 'react'
-import jwtDecode from 'jwt-decode'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Script from 'next/script'
 
 function MyApp({ Component, pageProps }) {
 	const [cart, setCart] = useState([])

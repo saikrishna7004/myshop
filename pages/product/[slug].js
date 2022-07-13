@@ -9,7 +9,6 @@ const Post = (props) => {
 	const router = useRouter()
 	const { slug } = router.query
 	const data = props.products.data[0].attributes
-	console.log(data.image.data.attributes)
 
 	return (
 		<>

@@ -96,7 +96,7 @@ const Signup = ({ recaptcha, serverUrl }) => {
                             <input id="cpassword" pattern='.{6,}' title='Password must be 6 chars long' name="cpassword" type="password" onChange={updateHandler} value={data.cpassword} autoComplete="password" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Confirm Password" />
                         </div>
                         {data.password && data.password != data.cpassword && 
-                        <div className="pt-2 text-red-500">Passwords doesn't match</div>
+                        <div className="pt-2 text-red-500">Passwords doesn&apos;t match</div>
                         }
                     </div>
 					<ReCAPTCHA sitekey={recaptcha} onChange={recaptchaChange} />

@@ -8,6 +8,7 @@ import Head from 'next/head';
 import ReCAPTCHA from "react-google-recaptcha"
 import axios from 'axios'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const Forgot = ({ recaptcha, serverUrl }) => {
 
@@ -69,7 +70,7 @@ const Forgot = ({ recaptcha, serverUrl }) => {
 						<h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Reset your Password</h2>
 						<p className="mt-2 text-center text-sm text-gray-600">
 							Click here to
-							<a href="/login" className="font-medium text-indigo-600 hover:text-indigo-500"> Sign in to Your Account </a>
+							<Link href="/login"><a className="font-medium text-indigo-600 hover:text-indigo-500"> Sign in to Your Account </a></Link>
 						</p>
 					</div>
 					<form className="mt-8 space-y-6" onSubmit={resetPass}>
@@ -83,7 +84,7 @@ const Forgot = ({ recaptcha, serverUrl }) => {
 								<input id="cpassword" pattern='.{6,}' title='Password must be 6 chars long' name="cpassword" type="password" onChange={updateHandler} value={data.cpassword} autoComplete="password" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Confirm Password" />
 							</div>
 							{data.password && data.password != data.cpassword && 
-							<div className="pt-2 text-red-500">Passwords doesn't match</div>
+							<div className="pt-2 text-red-500">Passwords doesn&apos;t match</div>
 							}
 						</div>
 
@@ -151,7 +152,7 @@ const Forgot = ({ recaptcha, serverUrl }) => {
                             <label htmlFor="email" className="sr-only">Email</label>
                             <input id="email" name="email" type="text" onChange={updateHandlerEmail} value={email} required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email" />
                         </div>
-						<div className='text-sm text-gray-600'>Don't worry, we don't share your email with anyone</div>
+						<div className='text-sm text-gray-600'>Don&apos;t worry, we don&apos;t share your email with anyone</div>
                     </div>
 					<ReCAPTCHA sitekey={recaptcha} onChange={recaptchaChange} />
                     <div>
