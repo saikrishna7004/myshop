@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import jwtDecode from 'jwt-decode'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Script from 'next/script'
 
 function MyApp({ Component, pageProps }) {
 	const [cart, setCart] = useState([])
@@ -142,7 +143,7 @@ function MyApp({ Component, pageProps }) {
 			<link rel='manifest' href='/manifest.json' />
 			<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png"/>
 			<meta name="theme-color" content="#000000"/>
-			<script src="register-sw.js"></script>
+			<Script src="register-sw.js"></Script>
 		</Head>
 		<Navbar key={reloadKey} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} setCookie={setCookie} getCookie={getCookie} />
 		<Component {...pageProps} cart={cart} setCart={setCart} setReloadKey={setReloadKey} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} setCookie={setCookie} getCookie={getCookie} />

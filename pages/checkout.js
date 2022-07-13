@@ -116,25 +116,25 @@ const Checkout = (props) => {
 					</div>
 					<div className={"flex flex-col w-4/5 mx-auto " + `${s2State}`} id="s2">
 						<h1 className="text-xl font-medium title-font mb-4 text-gray-900">Choose a delivery option:</h1>
-						<div class="flex">
+						<div className="flex">
 							<div>
-								<div class="form-check p-1 my-1">
-									<input class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:border-4 checked:border-blue-600 focus:outline-none transition duration-100 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-									<label class="form-check-label inline-block text-gray-800 cursor-pointer" htmlFor="flexRadioDefault1">
+								<div className="form-check p-1 my-1">
+									<input className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:border-4 checked:border-blue-600 focus:outline-none transition duration-100 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+									<label className="form-check-label inline-block text-gray-800 cursor-pointer" htmlFor="flexRadioDefault1">
 										1 Day Delivery
 										<span className="text-gray-500">&nbsp;( ₹100 )</span>
 									</label>
 								</div>
-								<div class="form-check p-1 my-1">
-									<input class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:border-4 checked:border-blue-600 focus:outline-none transition duration-100 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
-									<label class="form-check-label inline-block text-gray-800 cursor-pointer" htmlFor="flexRadioDefault2">
+								<div className="form-check p-1 my-1">
+									<input className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:border-4 checked:border-blue-600 focus:outline-none transition duration-100 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
+									<label className="form-check-label inline-block text-gray-800 cursor-pointer" htmlFor="flexRadioDefault2">
 										2 Day Delivery
 										<span className="text-gray-500">&nbsp;( ₹50 )</span>
 									</label>
 								</div>
-								<div class="form-check p-1 my-1">
-									<input class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:border-4 checked:border-blue-600 focus:outline-none transition duration-100 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="flexRadioDefault" id="flexRadioDefault3" />
-									<label class="form-check-label inline-block text-gray-800 cursor-pointer" htmlFor="flexRadioDefault3">
+								<div className="form-check p-1 my-1">
+									<input className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:border-4 checked:border-blue-600 focus:outline-none transition duration-100 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="flexRadioDefault" id="flexRadioDefault3" />
+									<label className="form-check-label inline-block text-gray-800 cursor-pointer" htmlFor="flexRadioDefault3">
 										Normal Delivery
 									</label>
 								</div>
