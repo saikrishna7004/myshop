@@ -8,7 +8,13 @@ import { toast } from 'react-toastify'
 const Post = (props) => {
 	const router = useRouter()
 	const { slug } = router.query
-	const data = props.products.data[0].attributes
+	const data1 = props.products.data
+	if(!data1){
+		return <>
+			Something went wrong
+		</>
+	}
+	const data = data1[0].attributes
 
 	return (
 		<>
@@ -18,7 +24,7 @@ const Post = (props) => {
 		<section className="text-gray-600 body-font overflow-hidden">
 			<div className="container px-5 py-3 md:py-10 mx-auto">
 				<div className="lg:w-4/5 mx-auto flex flex-wrap">
-				<span className="lg:w-1/2 object-contain object-center rounded">
+				<span className="lg:w-1/2 object-contain object-center rounded mx-auto">
 				<Image alt="ecommerce" src={process.env.URL+data.image.data.attributes.url} height={data.image.data.attributes.height} width={data.image.data.attributes.width}/>
 				</span>
 				<div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 mb-4">

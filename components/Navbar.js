@@ -1,14 +1,14 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 
-const Navbar = ({getCookie, cart}) => {
+const Navbar = ({ getCookie, cart }) => {
 
     const [jwt, setJwt] = useState(false)
     useEffect(() => {
-        setJwt(getCookie('jwt')!='')
+        setJwt(getCookie('jwt') != '')
     }, [])
-     
+
 
     return (
         <header className="text-gray-600 body-font">
@@ -27,10 +27,10 @@ const Navbar = ({getCookie, cart}) => {
                     <Link href="/checkout"><a className="mr-5 hover:text-gray-900">Cart({cart.length})</a></Link>
                 </nav>
                 {
-                    jwt?
-                <Link href="/logout"><a className="inline-flex text-white bg-indigo-600 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-700 rounded text-sm mt-4 md:mt-0">Logout</a></Link>:
-                <Link href="/login"><a className="inline-flex text-white bg-indigo-600 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-700 rounded text-sm mt-4 md:mt-0">Login</a></Link>
-            }
+                    jwt ?
+                        <Link href="/logout"><a className="inline-flex text-white bg-indigo-600 border-0 py-2 px-4 w-20 text-center focus:outline-none hover:bg-indigo-700 rounded text-sm mt-4 md:mt-0">Logout</a></Link> :
+                        <Link href="/login"><a className="inline-flex text-white bg-indigo-600 border-0 py-2 px-4 w-20 text-center focus:outline-none hover:bg-indigo-700 rounded text-sm mt-4 md:mt-0">Login</a></Link>
+                }
             </div>
         </header>
     )

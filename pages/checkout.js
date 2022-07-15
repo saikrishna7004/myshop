@@ -112,7 +112,7 @@ const Checkout = (props) => {
 							<label htmlFor="address" className="leading-7 text-sm text-gray-600">Address</label>
 							<textarea id="address" name="address" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
 						</div>
-						<button onClick={() => { gotoStep(2) }} className="text-white bg-indigo-500 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-600 w-100 lg:w-1/4 rounded">Next</button>
+						<button onClick={() => { gotoStep(2) }} className="text-white bg-indigo-600 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-700 w-100 lg:w-1/4 rounded">Next</button>
 					</div>
 					<div className={"flex flex-col w-4/5 mx-auto " + `${s2State}`} id="s2">
 						<h1 className="text-xl font-medium title-font mb-4 text-gray-900">Choose a delivery option:</h1>
@@ -140,7 +140,7 @@ const Checkout = (props) => {
 								</div>
 							</div>
 						</div>
-						<button onClick={() => { gotoStep(3) }} className="my-4 text-white bg-indigo-500 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-600 w-100 lg:w-1/4 rounded">Next</button>
+						<button onClick={() => { gotoStep(3) }} className="my-4 text-white bg-indigo-600 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-700 w-100 lg:w-1/4 rounded">Next</button>
 					</div>
 					<div className={"flex flex-col w-4/5 mx-auto " + `${s3State}`} id="s3">
 						<h1 className="text-xl font-medium title-font mb-4 text-gray-900">Confirm Payment:</h1>
@@ -160,7 +160,7 @@ const Checkout = (props) => {
 								</div>
 							)
 						})}
-						<button onClick={() => { gotoStep(1) }} className="text-white md:ml-auto bg-indigo-500 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-600 w-100 lg:w-1/4 rounded">Next</button>
+						<button onClick={() => { gotoStep(1) }} className="text-white md:ml-auto bg-indigo-600 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-700 w-100 lg:w-1/4 rounded">Next</button>
 					</div>
 				</div>
 			</div>
